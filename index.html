@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apex Execution Engine — Sharper Sports Intelligence</title>
+<meta name="description" content="The Apex Execution Engine (AEE) delivers classified picks, written analysis, and live data dashboards across every major sport." />
+<meta property="og:title" content="The Apex Execution Engine" />
+<meta property="og:description" content="Sharper sports intelligence. Smarter bets." />
+<meta property="og:image" content="/logo.jpg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/jpeg" href="/logo.jpg">
+<style>
+  :root{
+    --void:#0A0C10;
+    --panel:#12151C;
+    --panel-raised:#171B24;
+    --hairline:#252B37;
+    --text:#E9ECF2;
+    --muted:#838EA3;
+    --beta:#4C8EFF;
+    --alpha:#9B6BFF;
+    --omega:#FFB238;
+    --beta-dim: rgba(76,142,255,0.12);
+    --alpha-dim: rgba(155,107,255,0.12);
+    --omega-dim: rgba(255,178,56,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--void);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif; font-weight:600; letter-spacing:-0.01em;}
+  a{color:inherit;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--muted);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:16px;
+  }
+  .eyebrow::before{content:''; width:16px; height:1px; background:var(--hairline);}
+  section{padding:96px 0; border-bottom:1px solid var(--hairline);}
+  section:last-of-type{border-bottom:none;}
+
+  /* NAV */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,12,16,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--hairline);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; padding:18px 24px;}
+  .logo{display:flex; align-items:center; gap:8px;}
+  .logo img{height:32px; width:auto; display:block;}
+  .footer-logo{height:26px; width:auto; display:block; margin-bottom:18px;}
+  .navlinks{display:flex; gap:32px; font-size:14px; color:var(--muted);}
+  .navlinks a{text-decoration:none; transition:color .15s;}
+  .navlinks a:hover{color:var(--text);}
+  .btn{
+    font-family:'Inter',sans-serif; font-weight:600; font-size:14px;
+    padding:11px 20px; border-radius:6px; border:1px solid transparent;
+    cursor:pointer; text-decoration:none; display:inline-block;
+    transition: transform .15s, border-color .15s, background .15s;
+  }
+  .btn-primary{background:var(--text); color:var(--void);}
+  .btn-primary:hover{transform:translateY(-1px);}
+  .btn-ghost{border-color:var(--hairline); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--muted);}
+
+  /* HERO */
+  .hero{padding-top:100px; padding-bottom:80px;}
+  .hero .wrap{display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px; align-items:center;}
+  .hero h1{font-size:52px; line-height:1.05; margin-bottom:20px;}
+  .hero p.lead{font-size:18px; color:var(--muted); max-width:480px; margin-bottom:32px;}
+  .hero .ctas{display:flex; gap:14px; margin-bottom:16px;}
+  .hero .subctas{font-size:13px; color:var(--muted); font-family:'JetBrains Mono',monospace;}
+
+  /* SIGNAL CONSOLE (signature element) */
+  .console{
+    background:var(--panel); border:1px solid var(--hairline); border-radius:12px;
+    padding:28px; position:relative; overflow:hidden;
+  }
+  .console-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:28px;}
+  .console-head .label{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em; color:var(--muted); text-transform:uppercase;}
+  .console-head .dot{width:7px; height:7px; border-radius:50%; background:var(--omega); box-shadow:0 0 8px var(--omega); animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.35;}}
+  .gauges{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; height:200px;}
+  .gauge{flex:1; display:flex; flex-direction:column; align-items:center; height:100%; justify-content:flex-end;}
+  .gauge .bar{
+    width:100%; border-radius:6px 6px 0 0;
+    transform-origin:bottom; animation:rise 1.4s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .gauge:nth-child(1) .bar{background:linear-gradient(180deg,var(--beta),transparent 220%); height:40%; animation-delay:.05s;}
+  .gauge:nth-child(2) .bar{background:linear-gradient(180deg,var(--alpha),transparent 220%); height:68%; animation-delay:.2s;}
+  .gauge:nth-child(3) .bar{background:linear-gradient(180deg,var(--omega),transparent 220%); height:94%; animation-delay:.35s;}
+  @keyframes rise{from{transform:scaleY(0);} to{transform:scaleY(1);}}
+  .gauge .tag{margin-top:14px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.08em;}
+  .gauge:nth-child(1) .tag{color:var(--beta);}
+  .gauge:nth-child(2) .tag{color:var(--alpha);}
+  .gauge:nth-child(3) .tag{color:var(--omega);}
+  .console-foot{margin-top:24px; padding-top:20px; border-top:1px solid var(--hairline); font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); display:flex; justify-content:space-between;}
+
+  /* TRUST BAR */
+  .trust{padding:36px 0; border-bottom:1px solid var(--hairline);}
+  .trust .wrap{display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--muted); letter-spacing:0.04em;}
+
+  /* STEPS */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:32px; margin-top:48px;}
+  .step .num{font-family:'JetBrains Mono',monospace; color:var(--muted); font-size:13px; margin-bottom:14px;}
+  .step h3{font-size:20px; margin-bottom:10px;}
+  .step p{color:var(--muted); font-size:15px;}
+
+  /* CLASSIFICATION */
+  .tiers-explain{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:48px;}
+  .tier-card{background:var(--panel); border:1px solid var(--hairline); border-radius:10px; padding:26px;}
+  .tier-card .tier-name{font-family:'JetBrains Mono',monospace; font-size:15px; font-weight:600; letter-spacing:0.05em; margin-bottom:8px;}
+  .tier-card.beta{border-top:2px solid var(--beta);} .tier-card.beta .tier-name{color:var(--beta);}
+  .tier-card.alpha{border-top:2px solid var(--alpha);} .tier-card.alpha .tier-name{color:var(--alpha);}
+  .tier-card.omega{border-top:2px solid var(--omega);} .tier-card.omega .tier-name{color:var(--omega);}
+  .tier-card .desc{color:var(--muted); font-size:14px; margin-bottom:14px;}
+  .tier-card .who{font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text); background:var(--panel-raised); display:inline-block; padding:4px 10px; border-radius:4px;}
+
+  /* PRICING */
+  .pricing-table{margin-top:48px; overflow-x:auto;}
+  table{width:100%; border-collapse:collapse; min-width:760px;}
+  th,td{text-align:left; padding:16px 14px; border-bottom:1px solid var(--hairline); font-size:14px;}
+  th{font-family:'JetBrains Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); font-weight:500;}
+  th.tier-col{color:var(--text); font-size:14px; text-transform:none;}
+  td.price{font-family:'JetBrains Mono',monospace; font-weight:600; font-size:16px;}
+  td.check{color:var(--omega);}
+  td.dash{color:var(--hairline);}
+  tr.anchor td{background:var(--panel);}
+  .pricing-cta{margin-top:28px; text-align:center;}
+
+  /* PILLARS */
+  .pillars{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:48px;}
+  .pillar{padding:28px; background:var(--panel); border:1px solid var(--hairline); border-radius:10px;}
+  .pillar h3{font-size:18px; margin-bottom:10px;}
+  .pillar p{color:var(--muted); font-size:14px;}
+
+  /* VIP */
+  .vip{background:linear-gradient(135deg, var(--panel), var(--panel-raised)); border:1px solid var(--hairline); border-radius:14px; padding:56px; text-align:center; margin-top:16px;}
+  .vip h2{font-size:32px; margin-bottom:14px;}
+  .vip p{color:var(--muted); max-width:520px; margin:0 auto 28px;}
+
+  /* FAQ */
+  .faq-item{border-bottom:1px solid var(--hairline); padding:22px 0;}
+  .faq-item summary{cursor:pointer; font-size:16px; font-weight:500; list-style:none; display:flex; justify-content:space-between; align-items:center;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:'+'; color:var(--muted); font-size:20px;}
+  .faq-item[open] summary::after{content:'–';}
+  .faq-item p{color:var(--muted); margin-top:12px; font-size:14px; max-width:640px;}
+
+  /* FINAL CTA */
+  .final-cta{text-align:center; padding:110px 0;}
+  .final-cta h2{font-size:40px; margin-bottom:14px;}
+  .final-cta p.micro{margin-top:16px; color:var(--muted); font-size:13px; font-family:'JetBrains Mono',monospace;}
+
+  /* FOOTER */
+  footer{padding:48px 0; }
+  footer .wrap{display:flex; flex-direction:column; gap:20px;}
+  .foot-links{display:flex; flex-wrap:wrap; gap:24px; font-size:13px; color:var(--muted);}
+  .foot-links a{text-decoration:none;}
+  .foot-links a:hover{color:var(--text);}
+  .legal{font-size:12px; color:var(--muted); line-height:1.6; max-width:760px;}
+
+  @media(max-width:860px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero h1{font-size:38px;}
+    .steps, .tiers-explain, .pillars{grid-template-columns:1fr;}
+    .navlinks{display:none;}
+    section{padding:64px 0;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="logo"><img src="/logo.jpg" alt="The Apex Execution Engine" /></a>
+    <div class="navlinks">
+      <a href="#how">How it works</a>
+      <a href="#tiers">Classification</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#pricing" class="btn btn-primary">Join the Community</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">The Apex Execution Engine</div>
+      <h1>Sharper sports intelligence. Smarter bets.</h1>
+      <p class="lead">Classified picks, written analysis, and live data dashboards across every major sport — built for bettors who want an edge, not noise.</p>
+      <div class="ctas">
+        <a href="#pricing" class="btn btn-primary">Join the APEX Community</a>
+        <a href="#tiers" class="btn btn-ghost">See a Free Pick</a>
+      </div>
+      <div class="subctas">// No full-slate spam. Just the plays worth your attention.</div>
+    </div>
+    <div class="console">
+      <div class="console-head">
+        <span class="label">Signal Console</span>
+        <span class="dot"></span>
+      </div>
+      <div class="gauges">
+        <div class="gauge"><div class="bar"></div><div class="tag">BETA</div></div>
+        <div class="gauge"><div class="bar"></div><div class="tag">ALPHA</div></div>
+        <div class="gauge"><div class="bar"></div><div class="tag">OMEGA</div></div>
+      </div>
+      <div class="console-foot">
+        <span>CONFIDENCE READOUT</span>
+        <span>LIVE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <span>MLB</span><span>NBA</span><span>WNBA</span><span>NHL</span><span>NFL</span><span>ATP/WTA</span><span>NCAAB</span><span>NCAAF</span>
+  </div>
+</div>
+
+<section id="how">
+  <div class="wrap">
+    <div class="eyebrow">// 01 — How AEE works</div>
+    <h2 style="font-size:34px; max-width:540px;">From raw data to a decision you understand.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num">01</div>
+        <h3>We do the digging</h3>
+        <p>Our engine and analysts break down matchups, trends, and situational data most bettors never see.</p>
+      </div>
+      <div class="step">
+        <div class="num">02</div>
+        <h3>You get the signal</h3>
+        <p>Every pick is classified by confidence level — BETA, ALPHA, or OMEGA — so you always know how strong the play is.</p>
+      </div>
+      <div class="step">
+        <div class="num">03</div>
+        <h3>You decide the rest</h3>
+        <p>We give you the analysis and the confidence tier. Bet sizing and bankroll decisions are always yours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tiers">
+  <div class="wrap">
+    <div class="eyebrow">Pick classification</div>
+    <h2 style="font-size:34px; max-width:560px;">Know the strength of every play.</h2>
+    <p style="color:var(--muted); margin-top:14px; max-width:600px;">BETA, ALPHA, and OMEGA tell you how confident we are — nothing more. They're not bet-sizing advice; they're a read on signal strength, so you can weigh each play with your own judgment and bankroll approach.</p>
+    <div class="tiers-explain">
+      <div class="tier-card beta">
+        <div class="tier-name">BETA</div>
+        <div class="desc">Moderate-confidence plays.</div>
+        <span class="who">Free &amp; Daily members</span>
+      </div>
+      <div class="tier-card alpha">
+        <div class="tier-name">ALPHA</div>
+        <div class="desc">Strong, dominant-signal plays.</div>
+        <span class="who">Weekly &amp; Monthly members</span>
+      </div>
+      <div class="tier-card omega">
+        <div class="tier-name">OMEGA</div>
+        <div class="desc">Elite, highest-conviction plays.</div>
+        <span class="who">VIP &amp; Monthly members</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="eyebrow">Membership</div>
+    <h2 style="font-size:34px;">Find your level of access.</h2>
+    <div class="pricing-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Included</th>
+            <th class="tier-col">Free Teaser</th>
+            <th class="tier-col">Daily</th>
+            <th class="tier-col">Weekly</th>
+            <th class="tier-col">Monthly</th>
+            <th class="tier-col">VIP</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>BETA picks</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>ALPHA picks</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>OMEGA picks</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Written analysis</td><td>Limited</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Data dashboards</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+          <tr><td>Direct analyst messaging</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
+          <tr class="anchor"><td class="mono" style="color:var(--muted);">Price</td><td class="price">$0</td><td class="price">$6.99<span style="font-size:11px;color:var(--muted);">/day</span></td><td class="price">$22.99<span style="font-size:11px;color:var(--muted);">/wk</span></td><td class="price">$44.99<span style="font-size:11px;color:var(--muted);">/mo</span></td><td class="price">$89.99<span style="font-size:11px;color:var(--muted);">/mo</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pricing-cta"><a href="#" class="btn btn-primary">Choose your tier</a></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">What's included</div>
+    <h2 style="font-size:34px;">Three pillars, one engine.</h2>
+    <div class="pillars">
+      <div class="pillar"><h3>Picks</h3><p>Clear, classified selections across all covered sports — no guesswork on confidence level.</p></div>
+      <div class="pillar"><h3>Written analysis</h3><p>The "why" behind every pick — matchup breakdowns, situational trends, and the reasoning our engine surfaces.</p></div>
+      <div class="pillar"><h3>Data dashboards</h3><p>Live, browsable data views so members can dig past the picks themselves.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="vip">
+      <div class="eyebrow" style="justify-content:center;">VIP Spotlight</div>
+      <h2>Go deeper with VIP.</h2>
+      <p>VIP unlocks OMEGA-tier picks and direct messaging access to our analysts — for members who want to ask questions, get context, and go beyond the published content.</p>
+      <a href="#pricing" class="btn btn-primary">Explore VIP</a>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="eyebrow">FAQ</div>
+    <h2 style="font-size:34px; margin-bottom:8px;">Common questions.</h2>
+    <div style="margin-top:32px;">
+      <details class="faq-item">
+        <summary>What's the difference between BETA, ALPHA, and OMEGA picks?</summary>
+        <p>They're confidence classifications, not bet-sizing advice. BETA is moderate confidence, ALPHA is strong, and OMEGA is our highest-conviction tier.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does AEE tell me how much to bet?</summary>
+        <p>No. AEE provides classification and analysis only. Bankroll and bet-sizing decisions are always yours.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What sports do you cover?</summary>
+        <p>MLB, NBA, WNBA, NHL, NFL, ATP/WTA tennis, NCAAB, and NCAAF.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I cancel or change tiers anytime?</summary>
+        <p>Yes — you can change or cancel your membership at any time from your account settings.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is sports wagering legal in my state?</summary>
+        <p>Sports wagering legality varies by jurisdiction. It's your responsibility to confirm local legality before acting on any content.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What do I get with VIP that I don't get with Monthly?</summary>
+        <p>VIP adds direct messaging access to our analysts on top of full OMEGA-tier access.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <h2>Ready to bet smarter?</h2>
+    <a href="#pricing" class="btn btn-primary">Join the APEX Community</a>
+    <p class="micro">Start free. Upgrade anytime.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="/logo.jpg" alt="The Apex Execution Engine" class="footer-logo" />
+    <div class="foot-links">
+      <a href="#how">About</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#">Responsible Gambling</a>
+      <a href="#">Contact</a>
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+    </div>
+    <p class="legal">AEE provides sports data and analysis for informational purposes only and does not guarantee outcomes. Must be 18+ (or 21+ where required) and located in a jurisdiction where sports wagering is legal. If you or someone you know may have a gambling problem, call the National Council on Problem Gambling helpline at 1-800-522-4700.</p>
+  </div>
+</footer>
+
+</body>
+</html>
