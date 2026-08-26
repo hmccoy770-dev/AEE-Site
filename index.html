@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -62,7 +61,7 @@
   }
   nav .wrap{display:flex; align-items:center; justify-content:space-between; padding:18px 24px;}
   .logo{display:flex; align-items:center; gap:8px;}
-  .logo img{height:84px; width:auto; display:block;}
+  .logo img{height:32px; width:auto; display:block;}
   .footer-logo{height:26px; width:auto; display:block; margin-bottom:18px;}
   .navlinks{display:flex; gap:32px; font-size:14px; color:var(--muted);}
   .navlinks a{text-decoration:none; transition:color .15s;}
@@ -142,6 +141,37 @@
   td.dash{color:var(--hairline);}
   tr.anchor td{background:var(--panel);}
   .pricing-cta{margin-top:28px; text-align:center;}
+
+  /* MEMBERSHIP / WAITLIST */
+  .membership-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; margin-top:40px; align-items:start;}
+  .membership-copy p{color:var(--muted); font-size:15px; margin-bottom:16px; max-width:480px;}
+  .waitlist-form{margin-top:28px; max-width:420px;}
+  .waitlist-form label{display:block; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); margin-bottom:8px;}
+  .waitlist-form input[type="email"]{
+    width:100%; padding:13px 14px; border-radius:6px; border:1px solid var(--hairline);
+    background:var(--panel); color:var(--text); font-family:'Inter',sans-serif; font-size:14px; margin-bottom:14px;
+  }
+  .waitlist-form input[type="email"]::placeholder{color:var(--muted);}
+  .waitlist-form input[type="email"]:focus{outline:none; border-color:var(--alpha);}
+  .waitlist-form button{
+    width:100%; padding:13px 20px; border-radius:6px; border:none;
+    background:var(--omega); color:#1a1206; font-weight:600; font-size:14px; cursor:pointer;
+    font-family:'Inter',sans-serif; transition:transform .15s;
+  }
+  .waitlist-form button:hover{transform:translateY(-1px);}
+  .waitlist-note{font-size:12px; color:var(--muted); margin-top:12px; font-family:'JetBrains Mono',monospace;}
+  .waitlist-success{display:none; color:var(--omega); font-size:14px; margin-top:14px; font-family:'JetBrains Mono',monospace;}
+
+  .membership-side p{color:var(--muted); font-size:14px; margin-bottom:16px;}
+  .membership-side a{color:var(--beta); text-decoration:underline;}
+  .info-box{background:var(--panel); border:1px solid var(--hairline); border-radius:10px; padding:22px; margin-top:20px;}
+  .info-box .info-label{font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--alpha); margin-bottom:14px;}
+  .info-box p{color:var(--muted); font-size:13px; margin-bottom:12px; line-height:1.6;}
+  .info-box p:last-child{margin-bottom:0;}
+
+  @media(max-width:860px){
+    .membership-grid{grid-template-columns:1fr;}
+  }
 
   /* PILLARS */
   .pillars{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:48px;}
@@ -286,32 +316,32 @@
 
 <section id="pricing">
   <div class="wrap">
-    <div class="eyebrow">Membership</div>
-    <h2 style="font-size:34px;">Find your level of access.</h2>
-    <div class="pricing-table">
-      <table>
-        <thead>
-          <tr>
-            <th>Included</th>
-            <th class="tier-col">Free Teaser</th>
-            <th class="tier-col">Daily</th>
-            <th class="tier-col">Weekly</th>
-            <th class="tier-col">Monthly</th>
-            <th class="tier-col">VIP</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>BETA picks</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>ALPHA picks</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>OMEGA picks</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>Written analysis</td><td>Limited</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>Data dashboards</td><td class="dash">—</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
-          <tr><td>Direct analyst messaging</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="check">✓</td></tr>
-          <tr class="anchor"><td class="mono" style="color:var(--muted);">Price</td><td class="price">$0</td><td class="price">$6.99<span style="font-size:11px;color:var(--muted);">/day</span></td><td class="price">$22.99<span style="font-size:11px;color:var(--muted);">/wk</span></td><td class="price">$44.99<span style="font-size:11px;color:var(--muted);">/mo</span></td><td class="price">$89.99<span style="font-size:11px;color:var(--muted);">/mo</span></td></tr>
-        </tbody>
-      </table>
+    <div class="membership-grid">
+      <div class="membership-copy">
+        <div class="eyebrow">§ 05 — Membership</div>
+        <h2 style="font-size:34px; margin-bottom:20px;">Membership access opens in cohorts.</h2>
+        <p>AEE is a membership, not a tip-line. Cohort invitations go out by email when a new group opens. Leave an email and AEE will reach out when the next one does. No commitment beyond the email.</p>
+
+        <form class="waitlist-form" id="waitlist-form" action="https://formspree.io/f/mppzaavk" method="POST">
+          <label for="waitlist-email">Email address</label>
+          <input type="email" id="waitlist-email" name="email" placeholder="you@example.com" required />
+          <button type="submit">Join waitlist</button>
+        </form>
+        <div class="waitlist-success" id="waitlist-success">// You're on the list. Watch your inbox.</div>
+        <div class="waitlist-note" id="waitlist-note">// No spam. One email when your cohort opens.</div>
+      </div>
+
+      <div class="membership-side">
+        <p>Sports betting involves risk. Nothing on this site guarantees a particular outcome, and past results don't predict future ones. This service provides information and analysis to support your own decisions — it is not a promise of profit. Must be 18+ (or 21+ where required) and located where sports wagering is legal. If gambling is affecting your life, help is available: call the National Council on Problem Gambling helpline at 1-800-522-4700.</p>
+
+        <div class="info-box">
+          <div class="info-label">What "cohort" means</div>
+          <p>Membership access is offered in groups rather than continuously, so cohort members start from the same published record.</p>
+          <p>Terms and any pricing applicable to a cohort are shared when the cohort is invited — nothing is finalized in advance.</p>
+          <p>Prior to an invitation, AEE does not guarantee access timing or cohort size; both are subject to editorial capacity.</p>
+        </div>
+      </div>
     </div>
-    <div class="pricing-cta"><a href="#" class="btn btn-primary">Choose your tier</a></div>
   </div>
 </section>
 
@@ -395,5 +425,39 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  var form = document.getElementById('waitlist-form');
+  var success = document.getElementById('waitlist-success');
+  var note = document.getElementById('waitlist-note');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = new FormData(form);
+    var btn = form.querySelector('button');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function(res){
+      if(res.ok){
+        form.style.display = 'none';
+        note.style.display = 'none';
+        success.style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Join waitlist';
+        alert('Something went wrong — please try again.');
+      }
+    }).catch(function(){
+      btn.disabled = false;
+      btn.textContent = 'Join waitlist';
+      alert('Something went wrong — please try again.');
+    });
+  });
+})();
+</script>
 </body>
 </html>
