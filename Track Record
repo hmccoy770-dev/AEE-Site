@@ -1,0 +1,122 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Track Record — The Apex Execution Engine</title>
+<meta name="description" content="AEE's transparent results record, updated regularly." />
+<link rel="icon" type="image/jpeg" href="/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0A0C10; --panel:#12151C; --panel-raised:#171B24; --hairline:#252B37;
+    --text:#E9ECF2; --muted:#838EA3; --beta:#4C8EFF; --alpha:#9B6BFF; --omega:#FFB238;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--void); color:var(--text); font-family:'Inter',sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif; font-weight:600;}
+  a{color:inherit;}
+  .wrap{max-width:860px; margin:0 auto; padding:0 24px;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+
+  nav{position:sticky; top:0; z-index:50; background:rgba(10,12,16,0.85); backdrop-filter:blur(10px); border-bottom:1px solid var(--hairline);}
+  nav .wrap{max-width:1120px; display:flex; align-items:center; justify-content:space-between; padding:12px 24px;}
+  .logo{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .logo img{height:48px; width:auto; display:block;}
+  .logo-text{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16px; color:var(--text); white-space:nowrap;}
+  .btn{font-weight:600; font-size:14px; padding:11px 20px; border-radius:6px; text-decoration:none; display:inline-block; background:var(--text); color:var(--void);}
+
+  main{padding:64px 0 100px;}
+  .eyebrow{font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:10px; margin-bottom:16px;}
+  .eyebrow::before{content:''; width:20px; height:2px; border-radius:2px; background:linear-gradient(90deg, var(--beta), var(--alpha), var(--omega));}
+  h1{font-size:32px; margin-bottom:8px;}
+  .date-line{color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:13px; margin-bottom:12px;}
+  .intro{color:var(--muted); font-size:15px; max-width:600px; margin-bottom:40px;}
+
+  .stat-row{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:48px;}
+  .stat-card{background:var(--panel); border:1px solid var(--hairline); border-radius:10px; padding:20px; text-align:center;}
+  .stat-card .num{font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:700;}
+  .stat-card .label{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-top:6px;}
+  .stat-card.overall .num{color:var(--omega);}
+
+  table{width:100%; border-collapse:collapse; margin-bottom:40px;}
+  th,td{text-align:left; padding:14px; border-bottom:1px solid var(--hairline); font-size:14px;}
+  th{font-family:'JetBrains Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); font-weight:500;}
+  td.num-cell{font-family:'JetBrains Mono',monospace;}
+  tr.total td{background:var(--panel); font-weight:600;}
+  .class-beta{color:var(--beta);} .class-alpha{color:var(--alpha);} .class-omega{color:var(--omega);}
+
+  h2.section-h{font-size:20px; margin-bottom:16px; margin-top:8px;}
+
+  .legal{font-size:12px; color:var(--muted); line-height:1.6; margin-top:48px; padding-top:24px; border-top:1px solid var(--hairline);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="/" class="logo"><img src="/logo.jpg" alt="The Apex Execution Engine" /><span class="logo-text">The Apex Execution Engine</span></a>
+    <a href="/#pricing" class="btn">Join the Community</a>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+    <div class="eyebrow">Track Record</div>
+    <h1>Our Results, In the Open</h1>
+    <div class="date-line">// Updated: August 30, 2026</div>
+    <p class="intro">Every insight we share gets logged and tracked — wins, losses, and pending, by classification. No cherry-picking, no hiding a bad stretch. This is the same ledger our own community sees.</p>
+
+    <div class="stat-row">
+      <div class="stat-card overall">
+        <div class="num">78.57%</div>
+        <div class="label">Overall Win Rate</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">22–6</div>
+        <div class="label">Overall W–L</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">0</div>
+        <div class="label">Pending</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">28</div>
+        <div class="label">Total Logged</div>
+      </div>
+    </div>
+
+    <h2 class="section-h">Cumulative Record by Classification</h2>
+    <table>
+      <thead>
+        <tr><th>Class</th><th>Wins</th><th>Losses</th><th>Pending</th><th>Win Rate</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="class-omega">OMEGA</td><td class="num-cell">1</td><td class="num-cell">0</td><td class="num-cell">0</td><td class="num-cell">100.00%</td></tr>
+        <tr><td class="class-alpha">ALPHA</td><td class="num-cell">12</td><td class="num-cell">4</td><td class="num-cell">0</td><td class="num-cell">75.00%</td></tr>
+        <tr><td class="class-beta">BETA</td><td class="num-cell">9</td><td class="num-cell">2</td><td class="num-cell">0</td><td class="num-cell">81.82%</td></tr>
+        <tr class="total"><td>Overall</td><td class="num-cell">22</td><td class="num-cell">6</td><td class="num-cell">0</td><td class="num-cell">78.57%</td></tr>
+      </tbody>
+    </table>
+
+    <h2 class="section-h">Latest Daily Ledger — August 30, 2026</h2>
+    <table>
+      <thead>
+        <tr><th>Sport</th><th>Wins</th><th>Losses</th><th>Pending</th><th>Win Rate</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Tennis</td><td class="num-cell">6</td><td class="num-cell">1</td><td class="num-cell">0</td><td class="num-cell">85.71%</td></tr>
+        <tr><td>MLB</td><td class="num-cell">4</td><td class="num-cell">1</td><td class="num-cell">0</td><td class="num-cell">80.00%</td></tr>
+        <tr><td>WNBA</td><td class="num-cell">1</td><td class="num-cell">1</td><td class="num-cell">0</td><td class="num-cell">50.00%</td></tr>
+        <tr class="total"><td>Combined</td><td class="num-cell">11</td><td class="num-cell">3</td><td class="num-cell">0</td><td class="num-cell">78.57%</td></tr>
+      </tbody>
+    </table>
+
+    <p class="legal">Past results do not guarantee future performance. Win rates reflect logged outcomes only and do not account for bet sizing, odds, or overall profitability. Sports betting involves risk. Must be 18+ (or 21+ where required) and located in a jurisdiction where sports wagering is legal. If gambling is affecting your life, help is available: call the National Council on Problem Gambling helpline at 1-800-522-4700.</p>
+
+  </div>
+</main>
+
+</body>
+</html>
