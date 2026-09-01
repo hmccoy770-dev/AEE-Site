@@ -1,10 +1,9 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Today's Sample Insight — The Apex Execution Engine</title>
-<meta name="description" content="Today's free insight from The Apex Execution Engine." />
+<meta name="description" content="Today's Sample Insight from The Apex Execution Engine." />
 <link rel="icon" type="image/jpeg" href="/logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +14,7 @@
     --text:#E9ECF2; --muted:#838EA3; --beta:#4C8EFF; --alpha:#9B6BFF; --omega:#FFB238;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  body{background:var(--void); color:var(--text); font-family:'Inter',sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased;}
+  body{background:var(--void); background-image:radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px); background-size:28px 28px; color:var(--text); font-family:'Inter',sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased;}
   h1,h2,h3{font-family:'Space Grotesk',sans-serif; font-weight:600;}
   a{color:inherit;}
   .wrap{max-width:720px; margin:0 auto; padding:0 24px;}
@@ -28,13 +27,21 @@
   .logo-text{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16px; color:var(--text); white-space:nowrap;}
   .btn{font-weight:600; font-size:14px; padding:11px 20px; border-radius:6px; text-decoration:none; display:inline-block; background:var(--text); color:var(--void);}
 
-  main{padding:64px 0 100px;}
+  main{padding:64px 0 100px; position:relative; overflow:hidden;}
+  main::before{
+    content:''; position:absolute; top:-220px; left:50%; transform:translateX(-50%);
+    width:900px; height:500px;
+    background:radial-gradient(ellipse at center, rgba(76,142,255,0.08), rgba(155,107,255,0.06) 40%, transparent 70%);
+    pointer-events:none; z-index:0;
+  }
+  main .wrap{position:relative; z-index:1;}
   .eyebrow{font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:10px; margin-bottom:16px;}
   .eyebrow::before{content:''; width:20px; height:2px; border-radius:2px; background:linear-gradient(90deg, var(--beta), var(--alpha), var(--omega));}
   h1{font-size:32px; margin-bottom:8px;}
   .date-line{color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:13px; margin-bottom:36px;}
 
-  .pick-card{background:var(--panel); border:1px solid var(--hairline); border-radius:14px; padding:32px; margin-bottom:24px;}
+  .pick-card{background:var(--panel); border:1px solid var(--hairline); border-top:2px solid var(--beta); border-radius:14px; padding:32px; margin-bottom:24px; transition:border-color .2s, box-shadow .2s;}
+  .pick-card:hover{box-shadow:0 12px 32px rgba(0,0,0,0.35);}
   .tier-badge{display:inline-flex; align-items:center; gap:6px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.06em; padding:5px 12px; border-radius:20px; margin-bottom:20px;}
   .tier-badge.beta{background:rgba(76,142,255,0.12); color:var(--beta);}
   .matchup{font-size:24px; font-weight:600; margin-bottom:6px;}
@@ -49,8 +56,6 @@
   .cta-box p{color:var(--muted); margin-bottom:20px; font-size:15px;}
 
   .legal{font-size:12px; color:var(--muted); line-height:1.6; margin-top:48px; padding-top:24px; border-top:1px solid var(--hairline);}
-
-  .edit-note{background:rgba(255,178,56,0.08); border:1px dashed var(--omega); border-radius:8px; padding:16px 20px; margin-bottom:32px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--omega); line-height:1.6;}
 </style>
 </head>
 <body>
@@ -65,23 +70,23 @@
 <main>
   <div class="wrap">
 
-        <div class="eyebrow">Free Insight</div>
-    <h1>Today's Free Insight</h1>
-    <div class="date-line"> Updated: Updated: September 1st, 2026 </div>
+    <div class="eyebrow">Sample Insight</div>
+    <h1>Today's Sample Insight</h1>
+    <div class="date-line">// Updated: September 1, 2026</div>
 
     <!-- PICK CARD START -->
     <div class="pick-card">
       <span class="tier-badge beta">BETA CONFIDENCE</span>
       <div class="matchup">NY Yankees @ LA Angels</div>
-      <div class="league-line"> MLB · 9:38PM est - 9/1/26 </div>
+      <div class="league-line">MLB · 9:38 PM Est / 09/01/2026</div>
 
       <div class="pick-line">
-        <div class="label">Reality Insight</div>
-        <div class="value">Yankees ML</div>
+        <div class="label">The Insight</div>
+        <div class="value">NY Yankees ML</div>
       </div>
 
       <div class="analysis">
-        <h3>Why this Insight</h3>
+        <h3>Insight Analysis</h3>
         <p>New York enters with substantially stronger run creation and run prevention over the full season—622 runs scored, 505 allowed, +117 differential. New York’s expected order provides multiple independent run-creation points rather than one concentrated offensive mechanism.</p>
       </div>
     </div>
@@ -92,7 +97,7 @@
       <a href="/#pricing" class="btn">Join the Waitlist</a>
     </div>
 
-    <p class="legal">This free example of Insight is provided for informational purposes only and does not guarantee any outcome. Sports betting involves risk. Must be 18+ (or 21+ where required) and located in a jurisdiction where sports wagering is legal. If gambling is affecting your life, help is available: call the National Council on Problem Gambling helpline at 1-800-522-4700.</p>
+    <p class="legal">This Sample Insight is provided for informational purposes only and does not guarantee any outcome. Sports betting involves risk. Must be 18+ (or 21+ where required) and located in a jurisdiction where sports wagering is legal. If gambling is affecting your life, help is available: call the National Council on Problem Gambling helpline at 1-800-522-4700.</p>
 
   </div>
 </main>
